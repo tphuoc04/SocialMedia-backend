@@ -1,1 +1,2 @@
-export { default as indexRouter } from "./indexRouter"
+export { default as productRouter } from "./productRouter"
+export { default as authRouter } from "./authRouter";

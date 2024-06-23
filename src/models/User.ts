@@ -1,22 +1,8 @@
 import mongoose, { Document, Schema } from 'mongoose';
 import db from './db';
+import { User } from '../types';
 
-interface User {
-    // User Info
-    name: string;
-    username: string,
-    email: string;
-    password: string;
-
-    // Acount Status
-    active: boolean;
-    lock: boolean;
-    token: string
-}
-
-interface UserModel extends User, Document {}
-
-const userSchema = new Schema<UserModel>({
+const userSchema = new Schema<User>({
     // User Infomation
     name: { 
         type: String, 
@@ -34,7 +20,14 @@ const userSchema = new Schema<UserModel>({
     },
     password: {
         type: String,
-        required: true
+    },
+    facebookId: { 
+        type: String, 
+        unique: true 
+    },
+    googleId: { 
+        type: String, 
+        unique: true 
     },
 
     // account info
@@ -44,6 +37,6 @@ const userSchema = new Schema<UserModel>({
     
 }, { timestamps: true });
 
-const UserModel = mongoose.model<UserModel>('User', userSchema);
+const User = mongoose.model<User>('User', userSchema);
 
-export default UserModel;
+export default User;
